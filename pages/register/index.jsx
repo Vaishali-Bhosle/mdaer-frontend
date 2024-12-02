@@ -9,7 +9,7 @@ export default function Register() {
       <Logo />
 
       {/* Main Content */}
-      <main className="flex flex-1 items-center justify-center">
+      <main className="mt-14 flex flex-1 items-center justify-center">
         {/* Left Section */}
         <div className="w-[600px] bg-white/10 border-2 border-white rounded-2xl shadow-inner backdrop-blur-lg p-8 mx-4">
           <h1 className="text-center text-blue-800 font-bold text-2xl mb-6">
@@ -66,9 +66,7 @@ export default function Register() {
                 className="w-6 h-6 bg-green-600 mr-3"
               />
               <p className="text-gray-700 text-sm">
-                I have read and accept the Terms of
-                <br />
-                <span className="font-medium">Service & Privacy Policy</span>
+                I have read and accept the Terms of <b>Service</b> & <b>Privacy Policy</b>
               </p>
             </div>
             <button

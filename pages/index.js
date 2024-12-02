@@ -1,115 +1,191 @@
-import Image from "next/image";
-import localFont from "next/font/local";
+import React from 'react';
+import Head from 'next/head';
+import Logo_DarkMode from './components/Logo_DarkMode';
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
-
-export default function Home() {
+const Landing = () => {
   return (
-    <div
-      className={`${geistSans.variable} ${geistMono.variable} grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
-    >
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              pages/index.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <>
+      <div className="landing-container">
+        <Head>
+          <title>Landing Page - MDAERP</title>
+        </Head>
+        <header className="landing-header">
+          <div className="landing-logo">
+            <Logo_DarkMode/>
+          </div>
+          <nav className="landing-nav">
+            <a href="#home">Home</a>
+            <a href="#facilities">Facilities</a>
+            <a href="#testimonials">Testimonials</a>
+            <a href="#trusted-by">Trusted by</a>
+            <a href="#try-now">Try Now</a>
+          </nav>
+          <button className="landing-login-btn">Sign In / Sign Up</button>
+        </header>
+        <div className="landing-banner">
+          <div className="landing-banner-text">
+            <h1>Your Gateway to Medical Device Safety Reporting</h1>
+            <p>Simplifying the process of reporting adverse medical device events for everyone.</p>
+            <button className="landing-learn-more-btn">Learn More</button>
+          </div>
+          <div className="landing-banner-image">
+            <img src="/images/external/tq_bz1kbwpkor-m5hl-700w.png" alt="Medical Device Reporting" />
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        <section className="landing-features">
+          <h2>Features</h2>
+          <div className="landing-feature-cards">
+            <div className="feature-card">
+              <img src="/images/external/download18122-hrxc-200h.png" alt="Secure Data Handling" />
+              <h3>Secure Data Handling</h3>
+              <p>Your reports are encrypted and kept confidential to protect patient privacy.</p>
+            </div>
+            <div className="feature-card">
+              <img src="\images\external\download18122-m0uh-200h.png" alt="Real-Time Alerts" />
+              <h3>Real-Time Alerts</h3>
+              <p>Get notified immediately about critical updates on reported events.</p>
+            </div>
+            <div className="feature-card">
+              <img src="\images\external\download18122-q1h-200h.png" alt="User-Friendly Interface" />
+              <h3>User-Friendly Interface</h3>
+              <p>Intuitive design for seamless reporting, even for non-technical users.</p>
+            </div>
+          </div>
+        </section>
+        <footer className="landing-footer">
+          <p>Copyright © 2024 MDAERP-NIMHANS | All Rights Reserved | Privacy Policy</p>
+        </footer>
+      </div>
+      <style jsx>
+        {`
+          .landing-container {
+            font-family: 'Lato', sans-serif;
+            padding: 0;
+            margin: 0;
+            overflow-x: hidden;
+          }
+          .landing-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #004080;
+            color: white;
+          }
+          .landing-logo img {
+            height: 60px;
+          }
+          .landing-nav {
+            display: flex;
+            gap: 20px;
+          }
+          .landing-nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+          }
+          .landing-login-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+          }
+          .landing-banner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 50px;
+            background-color: #f5faff;
+          }
+          .landing-banner-text {
+            max-width: 50%;
+          }
+          .landing-banner-text h1 {
+            font-size: 48px;
+            color: #003366;
+          }
+          .landing-banner-text p {
+            font-size: 24px;
+            margin: 20px 0;
+            color: #333;
+          }
+          .landing-learn-more-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+          }
+          .landing-banner-image img {
+            width: 500px;
+            height: auto;
+          }
+          .landing-features {
+            text-align: center;
+            padding: 50px 20px;
+          }
+          .landing-features h2 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            color: #003366;
+          }
+          .landing-feature-cards {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+          }
+          .feature-card {
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #fff;
+            text-align: center;
+          }
+          .feature-card img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 15px;
+          }
+          .feature-card h3 {
+            font-size: 20px;
+            color: #003366;
+            margin-bottom: 10px;
+          }
+          .feature-card p {
+            font-size: 16px;
+            color: #666;
+          }
+          .landing-footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #004080;
+            color: white;
+          }
+          @media (max-width: 768px) {
+            .landing-banner {
+              flex-direction: column;
+              text-align: center;
+            }
+            .landing-banner-text {
+              max-width: 100%;
+            }
+            .landing-banner-image img {
+              width: 300px;
+            }
+            .landing-feature-cards {
+              flex-direction: column;
+            }
+          }
+        `}
+      </style>
+    </>
   );
-}
+};
+
+export default Landing;
