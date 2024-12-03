@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Logo_DarkMode from "./Logo_DarkMode";
+import Logo_DarkMode from "../components/Logo_DarkMode";
 
 const Layout = ({ children }) => {
   return (
