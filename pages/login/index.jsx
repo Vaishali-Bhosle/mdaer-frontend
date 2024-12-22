@@ -374,107 +374,235 @@
 //The above is correct, but now trying to implement the login function for all users properlt according to the DR.Sindu thing 
 
 
-// pages/login.js
-import { useState } from "react";
+// // pages/login.js
+// import { useState } from "react";
+// import { useRouter } from "next/router";
+// import Image from "next/image";
+// import Logo from "../components/Logo"; // Reusable Logo
+// import Footer from "../components/Footer"; // Reusable Footer
+
+// export default function Login() {
+//   const router = useRouter();
+//   const [username, setUsername] = useState("");
+//   const [password, setPassword] = useState("");
+//   const [error, setError] = useState("");
+
+//   const handleLogin = async () => {
+//     // Mock API Call
+//     const userType = await mockLogin(username, password); // Replace with actual API call
+
+//     if (userType) {
+//       // Simulated user data for testing
+//       const userData = {
+//         username,
+//         userType,
+//         department: userType === "DepartmentAdmin" ? "Cardiology" : null, // Example department
+//       };
+
+//       // Redirect to the dynamic dashboard test page
+//       router.push({
+//         pathname: `/dashboard/${userType.toLowerCase()}`,
+//         query: userData,
+//       });
+//     } else {
+//       setError("Invalid username or password.");
+//     }
+//   };
+
+//   return (
+//     <div className="flex flex-col min-h-screen bg-cyan-100">
+//       {/* Logo */}
+//       <Logo />
+
+//       {/* Login Form */}
+//       <main className="flex flex-1 items-center justify-center px-4">
+//         <div className="w-[600px] bg-white rounded-2xl shadow-lg p-8">
+//           <h1 className="text-2xl font-bold text-blue-800 text-center mb-6">
+//             Login to Your Account
+//           </h1>
+
+//           {error && (
+//             <p className="text-red-600 text-center mb-4">{error}</p>
+//           )}
+
+//           <input
+//             type="text"
+//             placeholder="Username"
+//             value={username}
+//             onChange={(e) => setUsername(e.target.value)}
+//             className="w-full h-12 border-b border-gray-400 mb-6 px-4 focus:outline-none focus:border-blue-600"
+//           />
+//           <input
+//             type="password"
+//             placeholder="Password"
+//             value={password}
+//             onChange={(e) => setPassword(e.target.value)}
+//             className="w-full h-12 border-b border-gray-400 mb-6 px-4 focus:outline-none focus:border-blue-600"
+//           />
+
+//           <button
+//             onClick={handleLogin}
+//             className="w-full h-12 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition"
+//           >
+//             Login
+//           </button>
+
+//           <div className="flex justify-between mt-4">
+//             <a href="/forgot-password" className="text-blue-600 text-sm underline">
+//               Forgot Password?
+//             </a>
+//             <a href="/register" className="text-blue-600 text-sm underline">
+//               Register
+//             </a>
+//           </div>
+//         </div>
+//       </main>
+
+//       {/* Footer */}
+//       <Footer />
+//     </div>
+//   );
+// }
+
+// // Mock API Call for Login (Replace with actual API)
+// async function mockLogin(username, password) {
+//   const mockDatabase = {
+//     "admin1": { password: "pass123", userType: "InstitutionAdmin" },
+//     "deptAdmin": { password: "pass123", userType: "DepartmentAdmin" },
+//     "coord1": { password: "pass123", userType: "Coordinator" },
+//     "hcp1": { password: "pass123", userType: "HealthcareProfessional" },
+//     "patient1": { password: "pass123", userType: "Patient" },
+//   };
+
+//   return mockDatabase[username]?.password === password
+//     ? mockDatabase[username].userType
+//     : null;
+// }
+
+//Above code is good, but now trying mock login using json 
+
+// import { useState } from "react";
+// import { useRouter } from "next/router";
+// import mockUsers from "../../public/mockUsers.json";
+
+// export default function Login() {
+//   const [username, setUsername] = useState("");
+//   const [password, setPassword] = useState("");
+//   const [error, setError] = useState("");
+//   const router = useRouter();
+
+//   const handleLogin = () => {
+//     const user = mockUsers.find(
+//       (u) => u.username === username && u.password === password
+//     );
+//     if (user) {
+//       const { role, institutionId, department } = user;
+//       if (role === "institutionAdmin") {
+//         router.push(`/dashboard/instAdmin/${institutionId}`);
+//       } else if (role === "departmentAdmin") {
+//         router.push(`/dashboard/deptAdmin/${institutionId}/${department}`);
+//       } else {
+//         setError("Invalid role.");
+//       }
+//     } else {
+//       setError("Invalid username or password.");
+//     }
+//   };
+
+//   return (
+//     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+//       <h1 className="text-2xl font-bold mb-6">Admin Login</h1>
+//       {error && <p className="text-red-600 mb-4">{error}</p>}
+//       <input
+//         type="text"
+//         placeholder="Username"
+//         value={username}
+//         onChange={(e) => setUsername(e.target.value)}
+//         className="w-80 p-2 mb-4 border rounded-lg"
+//       />
+//       <input
+//         type="password"
+//         placeholder="Password"
+//         value={password}
+//         onChange={(e) => setPassword(e.target.value)}
+//         className="w-80 p-2 mb-4 border rounded-lg"
+//       />
+//       <button
+//         onClick={handleLogin}
+//         className="w-80 p-2 bg-blue-600 text-white rounded-lg"
+//       >
+//         Login
+//       </button>
+//     </div>
+//   );
+// }
+
+
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import Image from "next/image";
-import Logo from "../components/Logo"; // Reusable Logo
-import Footer from "../components/Footer"; // Reusable Footer
 
 export default function Login() {
-  const router = useRouter();
+  const [mockUsers, setMockUsers] = useState([]);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const router = useRouter();
 
-  const handleLogin = async () => {
-    // Mock API Call
-    const userType = await mockLogin(username, password); // Replace with actual API call
+  // Fetch mock users from the JSON file
+  useEffect(() => {
+    const fetchMockUsers = async () => {
+      const response = await fetch("/mockUsers.json");
+      const data = await response.json();
+      setMockUsers(data);
+    };
+    fetchMockUsers();
+  }, []);
 
-    if (userType) {
-      // Simulated user data for testing
-      const userData = {
-        username,
-        userType,
-        department: userType === "DepartmentAdmin" ? "Cardiology" : null, // Example department
-      };
+  const handleLogin = () => {
+    const user = mockUsers.find(
+      (u) => u.username === username && u.password === password
+    );
 
-      // Redirect to the dynamic dashboard test page
-      router.push({
-        pathname: `/dashboard/${userType.toLowerCase()}`,
-        query: userData,
-      });
+    if (user) {
+      const { role, institutionId } = user;
+
+      // Redirect based on the role and institution
+      if (role === "institutionAdmin") {
+        router.push(`/dashboard/instAdmin/${institutionId}`);
+      } else if (role === "departmentAdmin") {
+        router.push(`/dashboard/deptAdmin/${institutionId}`);
+      } else {
+        setError("Invalid role or no dashboard available for this role.");
+      }
     } else {
       setError("Invalid username or password.");
     }
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-cyan-100">
-      {/* Logo */}
-      <Logo />
-
-      {/* Login Form */}
-      <main className="flex flex-1 items-center justify-center px-4">
-        <div className="w-[600px] bg-white rounded-2xl shadow-lg p-8">
-          <h1 className="text-2xl font-bold text-blue-800 text-center mb-6">
-            Login to Your Account
-          </h1>
-
-          {error && (
-            <p className="text-red-600 text-center mb-4">{error}</p>
-          )}
-
-          <input
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            className="w-full h-12 border-b border-gray-400 mb-6 px-4 focus:outline-none focus:border-blue-600"
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full h-12 border-b border-gray-400 mb-6 px-4 focus:outline-none focus:border-blue-600"
-          />
-
-          <button
-            onClick={handleLogin}
-            className="w-full h-12 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition"
-          >
-            Login
-          </button>
-
-          <div className="flex justify-between mt-4">
-            <a href="/forgot-password" className="text-blue-600 text-sm underline">
-              Forgot Password?
-            </a>
-            <a href="/register" className="text-blue-600 text-sm underline">
-              Register
-            </a>
-          </div>
-        </div>
-      </main>
-
-      {/* Footer */}
-      <Footer />
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <h1 className="text-2xl font-bold mb-6">Admin Login</h1>
+      {error && <p className="text-red-600 mb-4">{error}</p>}
+      <input
+        type="text"
+        placeholder="Username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        className="w-80 p-2 mb-4 border rounded-lg"
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        className="w-80 p-2 mb-4 border rounded-lg"
+      />
+      <button
+        onClick={handleLogin}
+        className="w-80 p-2 bg-blue-600 text-white rounded-lg"
+      >
+        Login
+      </button>
     </div>
   );
-}
-
-// Mock API Call for Login (Replace with actual API)
-async function mockLogin(username, password) {
-  const mockDatabase = {
-    "admin1": { password: "pass123", userType: "InstitutionAdmin" },
-    "deptAdmin": { password: "pass123", userType: "DepartmentAdmin" },
-    "coord1": { password: "pass123", userType: "Coordinator" },
-    "hcp1": { password: "pass123", userType: "HealthcareProfessional" },
-    "patient1": { password: "pass123", userType: "Patient" },
-  };
-
-  return mockDatabase[username]?.password === password
-    ? mockDatabase[username].userType
-    : null;
 }

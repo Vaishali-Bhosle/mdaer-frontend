@@ -1,0 +1,56 @@
+[
+    {
+      "role": "institutionAdmin",
+      "institutionId": "nimhans",
+      "username": "N_Admin",
+      "password": "N_Admin",
+      "name": "N_Admin"
+    },
+    {
+      "role": "institutionAdmin",
+      "institutionId": "kmio",
+      "username": "K_Admin",
+      "password": "K_Admin",
+      "name": "K_Admin"
+    },
+    {
+      "role": "institutionAdmin",
+      "institutionId": "msramaiah",
+      "username": "R_Admin",
+      "password": "R_Admin",
+      "name": "R_Admin"
+    },
+    {
+      "role": "departmentAdmin",
+      "institutionId": "nimhans",
+      "department": "Biomedical Engineering",
+      "username": "Sindu_M_G",
+      "password": "Sindu_M_G",
+      "name": "Sindu M G"
+    },
+    {
+      "role": "departmentAdmin",
+      "institutionId": "nimhans",
+      "department": "Biomedical Engineering",
+      "username": "Bme_1",
+      "password": "Bme_1",
+      "name": "Bme_1"
+    },
+    {
+      "role": "departmentAdmin",
+      "institutionId": "kmio",
+      "department": "Quality and Patient Safety",
+      "username": "Avinash_T",
+      "password": "Avinash_T",
+      "name": "Avinash T"
+    },
+    {
+      "role": "departmentAdmin",
+      "institutionId": "msramaiah",
+      "department": "Biomedical Engineering",
+      "username": "Pramod",
+      "password": "Pramod",
+      "name": "Pramod"
+    }
+  ]
+  
